@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/livros")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private List<Usuario> usuarios = new ArrayList<>();

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/livros")
+@RequestMapping("/emprestimos")
 public class EmprestimoController {
 
     private List<Emprestimo> emprestimos = new ArrayList<>();
