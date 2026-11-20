@@ -14,7 +14,7 @@ public class CategoriaController {
 
     private List<Categoria> categorias = new ArrayList<>();
 
-    @GetMapping
+    @GetMapping("/inicio")
     public String inicio(Model model){
         return "categorias/inicio";
     }
@@ -29,6 +29,12 @@ public class CategoriaController {
         return "categorias/categoria";
     }
 
+    @GetMapping
+    public String listarCategorias(Model model){
+        model.addAttribute("categorias", categorias);
+        return "categorias/lista";
+    }
+
     @PostMapping
     public String cadastrarCategoria(@ModelAttribute Categoria categoria){
         categorias.add(categoria);
@@ -36,7 +42,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/excluir/{indice}")
-    public String excluirLivro(@PathVariable int indice){
+    public String excluirCategoria(@PathVariable int indice){
         if (indice >= 0 && indice < categorias.size()){
             categorias.remove(indice);
         }

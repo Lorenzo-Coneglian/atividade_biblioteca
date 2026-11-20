@@ -14,10 +14,8 @@ public class UsuarioController {
 
     private List<Usuario> usuarios = new ArrayList<>();
 
-    @GetMapping
-    public String inicio(Model model) {
-        return "usuarios/inicio";
-    }
+    @GetMapping("/inicio")
+    public String inicio(Model model) { return "usuarios/inicio"; }
 
     @GetMapping("/usuario/{indice}")
     public String exibirUsuario(Model model, @PathVariable int indice) {
@@ -27,6 +25,12 @@ public class UsuarioController {
         }
         model.addAttribute("usuario", usuario);
         return "usuarios/usuario";
+    }
+
+    @GetMapping
+    public String listarUsuarios(Model model){
+        model.addAttribute("usuarios", usuarios);
+        return "usuarios/lista";
     }
 
     @PostMapping

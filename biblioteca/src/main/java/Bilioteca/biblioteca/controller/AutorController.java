@@ -14,7 +14,7 @@ public class AutorController {
 
     private List<Autor> autores = new ArrayList<>();
 
-    @GetMapping
+    @GetMapping("/inicio")
     public String inicio(Model model){
         return "autores/inicio";
     }
@@ -27,6 +27,12 @@ public class AutorController {
         }
         model.addAttribute("autor", autor);
         return "autores/autor";
+    }
+
+    @GetMapping
+    public String listarAutores(Model model){
+        model.addAttribute("autores", autores);
+        return "autores/lista";
     }
 
     @PostMapping

@@ -14,10 +14,8 @@ public class LivroController {
 
     private List<Livro> livros = new ArrayList<>();
 
-    @GetMapping
-    public String inicio(Model model){
-        return "livros/inicio";
-    }
+    @GetMapping("/inicio")
+    public String inicio(Model model){ return "livros/inicio"; }
 
     @GetMapping("/livro/{indice}")
     public String exibirLivro(Model model, @PathVariable int indice){
@@ -27,6 +25,12 @@ public class LivroController {
         }
         model.addAttribute("livro", livro);
         return "livros/livro";
+    }
+
+    @GetMapping
+    public String listarLivros(Model model){
+        model.addAttribute("livros", livros);
+        return "livros/lista";
     }
 
     @PostMapping

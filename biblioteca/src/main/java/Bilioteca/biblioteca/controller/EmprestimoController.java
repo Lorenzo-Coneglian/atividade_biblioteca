@@ -15,7 +15,7 @@ public class EmprestimoController {
 
     private List<Emprestimo> emprestimos = new ArrayList<>();
 
-    @GetMapping
+    @GetMapping("/inicio")
     public String inicio(Model model){
         return "emprestimos/inicio";
     }
@@ -27,7 +27,13 @@ public class EmprestimoController {
             emprestimo = emprestimos.get(indice);
         }
         model.addAttribute("emprestimo", emprestimo);
-        return "livros/livro";
+        return "emprestimos/emprestimo";
+    }
+
+    @GetMapping
+    public String listarEmprestimos(Model model){
+        model.addAttribute("emprestimos", emprestimos);
+        return "emprestimos/lista";
     }
 
     @PostMapping
@@ -41,6 +47,6 @@ public class EmprestimoController {
         if (indice >= 0 && indice < emprestimos.size()){
             emprestimos.remove(indice);
         }
-        return "redirect:/livros";
+        return "redirect:/emprestimos";
     }
 }
