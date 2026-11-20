@@ -1,11 +1,12 @@
 package Bilioteca.biblioteca.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Autor {
     private String nome;
     private String nacionalidade;
-    private List<Livro> obras;
+    private List<Livro> obras = new ArrayList<>();
 
     public String getNome() {
         return nome;

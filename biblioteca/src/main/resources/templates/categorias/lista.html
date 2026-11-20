@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorias</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Categorias</h1>
+    <a th:href="@{/livros/inicio}">Voltar</a>
+    <h2>Lista de categorias:</h2>
+    <ul>
+        <li th:each="categoria, idCategoria : ${categorias}">
+            <h3 th:text="|Gênero: ${categoria.genero}|">Genero</h3>
+            <form th:action="@{/categorias/excluir/{id}(id=${idCategoria.index})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    </ul>
+    <h2>Cadastrar Categoria:</h2>
+    <form th:action="@{/categorias}" th:object="${categoria}" method="post">
+        <label for="genero">Gênero:</label>
+        <input type="text" th:field="*{genero}" id="genero">
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

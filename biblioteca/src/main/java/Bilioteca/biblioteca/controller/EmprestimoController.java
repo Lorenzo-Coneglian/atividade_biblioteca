@@ -17,22 +17,13 @@ public class EmprestimoController {
 
     @GetMapping("/inicio")
     public String inicio(Model model){
-        return "emprestimos/inicio";
-    }
-
-    @GetMapping("/emprestimo/{indice}")
-    public String exibirEmprestimo(Model model, @PathVariable int indice){
-        Emprestimo emprestimo = null;
-        if (indice >= 0 && indice < emprestimos.size()){
-            emprestimo = emprestimos.get(indice);
-        }
-        model.addAttribute("emprestimo", emprestimo);
-        return "emprestimos/emprestimo";
+        return "livros/inicio";
     }
 
     @GetMapping
     public String listarEmprestimos(Model model){
         model.addAttribute("emprestimos", emprestimos);
+        model.addAttribute("emprestimo", new Emprestimo());
         return "emprestimos/lista";
     }
 
@@ -42,7 +33,7 @@ public class EmprestimoController {
         return "redirect:/emprestimos";
     }
 
-    @GetMapping("/excluir/{indice}")
+    @DeleteMapping("/excluir/{indice}")
     public String excluirEmprestimo(@PathVariable int indice){
         if (indice >= 0 && indice < emprestimos.size()){
             emprestimos.remove(indice);

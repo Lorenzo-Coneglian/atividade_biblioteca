@@ -17,19 +17,10 @@ public class LivroController {
     @GetMapping("/inicio")
     public String inicio(Model model){ return "livros/inicio"; }
 
-    @GetMapping("/livro/{indice}")
-    public String exibirLivro(Model model, @PathVariable int indice){
-        Livro livro = null;
-        if (indice >= 0 && indice < livros.size()){
-            livro = livros.get(indice);
-        }
-        model.addAttribute("livro", livro);
-        return "livros/livro";
-    }
-
     @GetMapping
     public String listarLivros(Model model){
         model.addAttribute("livros", livros);
+        model.addAttribute("livro", new Livro());
         return "livros/lista";
     }
 

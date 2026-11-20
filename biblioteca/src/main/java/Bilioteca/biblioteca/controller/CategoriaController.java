@@ -15,23 +15,12 @@ public class CategoriaController {
     private List<Categoria> categorias = new ArrayList<>();
 
     @GetMapping("/inicio")
-    public String inicio(Model model){
-        return "categorias/inicio";
-    }
-
-    @GetMapping("/categoria/{indice}")
-    public String exibirCategoria(Model model, @PathVariable int indice){
-        Categoria categoria = null;
-        if (indice >= 0 && indice < categorias.size()){
-            categoria = categorias.get(indice);
-        }
-        model.addAttribute("categoria", categoria);
-        return "categorias/categoria";
-    }
+    public String inicio(Model model){ return "livros/inicio"; }
 
     @GetMapping
     public String listarCategorias(Model model){
         model.addAttribute("categorias", categorias);
+        model.addAttribute("categoria", new Categoria());
         return "categorias/lista";
     }
 
@@ -41,7 +30,7 @@ public class CategoriaController {
         return "redirect:/categorias";
     }
 
-    @GetMapping("/excluir/{indice}")
+    @DeleteMapping("/excluir/{indice}")
     public String excluirCategoria(@PathVariable int indice){
         if (indice >= 0 && indice < categorias.size()){
             categorias.remove(indice);

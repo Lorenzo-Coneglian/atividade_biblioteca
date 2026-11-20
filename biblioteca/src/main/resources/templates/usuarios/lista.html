@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Usuários</h1>
+    <a th:href="@{/livros/inicio}">Voltar</a>
+    <h2>Lista de usuários:</h2>
+    <ul>
+        <li th:each="usuario, idUsuario : ${usuarios}">
+            <h3 th:text="|Nome: ${usuario.nome}|">Nome</h3>
+            <p th:text="|CPF: ${usuario.cpf}|">Cpf</p>
+            <p th:text="|ID: ${usuario.id}|">Id</p>
+            <form th:action="@{/usuarios/excluir/{id}(id=${idUsuario.index})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    </ul>
+    <h2>Cadastrar Usuário:</h2>
+    <form th:action="@{/usuarios}" th:object="${usuario}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" th:field="*{nome}" id="nome">
+        <label for="cpf">CPF:</label>
+        <input type="text" th:field="*{cpf}" id="cpf">
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

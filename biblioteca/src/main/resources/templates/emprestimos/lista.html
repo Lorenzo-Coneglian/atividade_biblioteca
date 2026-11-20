@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Empréstimos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+    <body>
+    <h1>Empréstimos</h1>
+    <a th:href="@{/livros/inicio}">Voltar</a>
+    <h2>Lista de empréstimos:</h2>
+    <ul>
+        <li th:each="emprestimo, idEmprestimo : ${emprestimos}">
+            <h3 th:text="|Nome do usuário: ${emprestimo.usuario.nome}|">Nome</h3>
+            <h3 th:text="|Data: ${emprestimo.dataEmprestimo}|">Data</h3>
+            <form th:action="@{/emprestimos/excluir/{id}(id=${idEmprestimo.index})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    </ul>
+    <h2>Cadastrar Empréstimo:</h2>
+    <form th:action="@{/emprestimos}" th:object="${emprestimo}" method="post">
+        <label for="nome">Nome do usuário:</label>
+        <input type="text" th:field="*{usuario.nome}" id="nome">
+        <label for="data">Data:</label>
+        <input type="datetime-local" th:field="*{dataEmprestimo}" id="data">
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Livros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Livros</h1>
+    <a th:href="@{/livros/inicio}">Voltar</a>
+    <h2>Lista de livros:</h2>
+    <ul>
+        <li th:each="livro, idLivro : ${livros}">
+            <h3 th:text="|Título: ${livro.titulo}|">Titulo</h3>
+            <p th:text="|Autor: ${livro.autor}|">Autor</p>
+            <p th:text="${livro.disponivel} ? 'Disponível' : 'Não disponível'">Disponivel</p>
+            <form th:action="@{/livros/excluir/{id}(id=${idLivro.index})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    </ul>
+    <h2>Cadastrar livro:</h2>
+    <form th:action="@{/livros}" th:object="${livro}" method="post">
+        <label for="titulo">Titulo:</label>
+        <input type="text" th:field="*{titulo}" id="titulo">
+        <label for="autor">Autor:</label>
+        <input type="text" th:field="*{autor}" id="autor">
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

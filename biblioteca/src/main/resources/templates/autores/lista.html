@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Autores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Autores</h1>
+    <a th:href="@{/livros/inicio}">Voltar</a>
+    <h2>Lista de autores:</h2>
+    <ul>
+        <li th:each="autor, idAutor : ${autores}">
+            <h3 th:text="|Nome: ${autor.nome}|">Nome</h3>
+            <p th:text="|Nacionalidade:: ${autor.nacionalidade}|">Nacionalidade</p>
+            <form th:action="@{/autores/excluir/{id}(id=${idAutor.index})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    </ul>
+    <h2>Cadastrar Autor:</h2>
+    <form th:action="@{/autores}" th:object="${autor}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" th:field="*{nome}" id="nome">
+        <label for="nacionalidade">Nacionalidade:</label>
+        <input type="text" th:field="*{nacionalidade}" id="nacionalidade">
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

@@ -16,22 +16,13 @@ public class AutorController {
 
     @GetMapping("/inicio")
     public String inicio(Model model){
-        return "autores/inicio";
-    }
-
-    @GetMapping("/autor/{indice}")
-    public String exibirAutor(Model model, @PathVariable int indice){
-        Autor autor = null;
-        if (indice >= 0 && indice < autores.size()){
-            autor = autores.get(indice);
-        }
-        model.addAttribute("autor", autor);
-        return "autores/autor";
+        return "livros/inicio";
     }
 
     @GetMapping
     public String listarAutores(Model model){
         model.addAttribute("autores", autores);
+        model.addAttribute("autor", new Autor());
         return "autores/lista";
     }
 

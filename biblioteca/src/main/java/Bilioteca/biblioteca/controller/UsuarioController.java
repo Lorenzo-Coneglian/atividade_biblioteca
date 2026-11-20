@@ -13,33 +13,27 @@ import java.util.List;
 public class UsuarioController {
 
     private List<Usuario> usuarios = new ArrayList<>();
+    private int id;
 
     @GetMapping("/inicio")
-    public String inicio(Model model) { return "usuarios/inicio"; }
-
-    @GetMapping("/usuario/{indice}")
-    public String exibirUsuario(Model model, @PathVariable int indice) {
-        Usuario usuario = null;
-        if (indice >= 0 && indice < usuarios.size()){
-            usuario = usuarios.get(indice);
-        }
-        model.addAttribute("usuario", usuario);
-        return "usuarios/usuario";
-    }
+    public String inicio(Model model) { return "livros/inicio"; }
 
     @GetMapping
     public String listarUsuarios(Model model){
         model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuario", new Usuario());
         return "usuarios/lista";
     }
 
     @PostMapping
     public String cadastrarUsuario(@ModelAttribute Usuario usuario) {
+        usuario.setId(this.id);
+        id+=1;
         usuarios.add(usuario);
         return "redirect:/usuarios";
     }
 
-    @GetMapping("/excluir/{indice}")
+    @DeleteMapping("/excluir/{indice}")
     public String excluirUsuario(@PathVariable int indice) {
         if (indice >= 0 && indice < usuarios.size()) {
             usuarios.remove(indice);
